@@ -437,6 +437,21 @@
   }
 };
 
+
+    DATA.external = {
+      "1": [
+        {
+          "x": 54.37007874015748,
+          "y": 86.75853018372704,
+          "w": 24.934383202099735,
+          "h": 10.923228346456693,
+          "url": "https://maps.app.goo.gl/sn9JC4gLSb1Sx7TDA",
+          "name": "Google Maps"
+        }
+      ]
+    };
+
+
     const stage = document.getElementById("stage");
     const slide = document.getElementById("slide");
     const loading = document.getElementById("loading");
@@ -483,6 +498,29 @@
           event.preventDefault();
           event.stopPropagation();
           goTo(link.target);
+        });
+
+        stage.appendChild(button);
+      });
+
+      const externalLinks = DATA.external[String(currentSlide)] || [];
+
+      externalLinks.forEach((link) => {
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.className = "hotspot";
+        button.setAttribute("aria-label", link.name || "Abrir enlace");
+
+        button.style.left = link.x + "%";
+        button.style.top = link.y + "%";
+        button.style.width = link.w + "%";
+        button.style.height = link.h + "%";
+
+        button.addEventListener("click", function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          window.location.href = link.url;
         });
 
         stage.appendChild(button);
