@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<title>Carta</title>
+<style>
+html,body{margin:0;width:100%;height:100%;background:#000;overflow:hidden}
+body{font-family:system-ui,sans-serif}
+#viewer{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center}
+#page{position:relative;max-width:100vw;max-height:100vh;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center}
+#slide{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;user-select:none;-webkit-user-drag:none}
+.hot{position:absolute;z-index:5;display:block}
+#fs{position:fixed;right:10px;top:max(10px,env(safe-area-inset-top));z-index:20;border:0;border-radius:22px;width:44px;height:44px;background:rgba(0,0,0,.48);color:#fff;font-size:22px}
+#home{position:fixed;left:10px;bottom:max(10px,env(safe-area-inset-bottom));z-index:20;border:0;border-radius:22px;padding:10px 14px;background:rgba(0,0,0,.48);color:#fff;font-size:13px}
+</style>
+</head>
+<body>
+<div id="viewer">
+ <div id="page"><img id="slide" draggable="false"></div>
+ <button id="fs" aria-label="Pantalla completa">⛶</button>
+ <button id="home" aria-label="Inicio">Inicio</button>
+</div>
+<script>
+const DATA={"count": 14, "links": {"1": [{"x": 0.44114583333333335, "y": 0.1, "w": 0.40625, "h": 0.7222222222222222, "target": 2}], "2": [{"x": 0.07381889763779527, "y": 0.3958005249343832, "w": 0.11811023622047244, "h": 0.2099737532808399, "target": 1}], "3": [{"x": 0.07389402887139107, "y": 0.3958005249343832, "w": 0.11811023622047244, "h": 0.2099737532808399, "target": 2}], "4": [{"x": 0.07381889763779527, "y": 0.3958005249343832, "w": 0.11811023622047244, "h": 0.2099737532808399, "target": 2}], "5": [{"x": 0.07381889763779527, "y": 0.3958005249343832, "w": 0.11811023622047244, "h": 0.2099737532808399, "target": 2}, {"x": 0.812007874015748, "y": 0.39501312335958005, "w": 0.11811023622047244, "h": 0.2099737532808399, "target": 6}, {"x": 0.08858267716535433, "y": 0.10498687664041995, "w": 0.05905511811023622, "h": 0.10498687664041995, "target": 2}], "6": [{"x": 0.07381889763779527, "y": 0.3958005249343832, "w": 0.11811023622047244, "h": 0.2099737532808399, "target": 5}, {"x": 0.812007874015748, "y": 0.39501312335958005, "w": 0.11811023622047244, "h": 0.2099737532808399, "target": 7}, {"x": 0.08858267716535433, "y": 0.10498687664041995, "w": 0.05905511811023622, "h": 0.10498687664041995, "target": 2}], "7": [{"x": 0.07381889763779527, "y": 0.3958005249343832, "w": 0.11811023622047244, "h": 0.2099737532808399, "target": 6}, {"x": 0.08858267716535433, "y": 0.10498687664041995, "w": 0.05905511811023622, "h": 0.10498687664041995, "target": 2}], "8": [{"x": 0.2640625, "y": 0.3277777777777778, "w": 0.17716535433070865, "h": 0.31496062992125984, "target": 9}, {"x": 0.5587723097112861, "y": 0.3277777777777778, "w": 0.17716535433070865, "h": 0.31496062992125984, "target": 12}, {"x": 0.18455544619422573, "y": 0.07874015748031496, "w": 0.05905511811023622, "h": 0.10498687664041995, "target": 2}], "9": [{"x": 0.04429133858267716, "y": 0.07874015748031496, "w": 0.09895833333333333, "h": 0.17592592592592593, "target": 10}, {"x": 0.8562992125984252, "y": 0.07874015748031496, "w": 0.09895833333333333, "h": 0.17592592592592593, "target": 11}, {"x": 0.18455544619422573, "y": 0.07874015748031496, "w": 0.05905511811023622, "h": 0.10498687664041995, "target": 2}], "10": [{"x": 0.8562992125984252, "y": 0.07874015748031496, "w": 0.09895833333333333, "h": 0.17592592592592593, "target": 9}, {"x": 0.04429133858267716, "y": 0.07874015748031496, "w": 0.09895833333333333, "h": 0.17592592592592593, "target": 11}, {"x": 0.18455544619422573, "y": 0.07874015748031496, "w": 0.05905511811023622, "h": 0.10498687664041995, "target": 2}], "11": [{"x": 0.04429133858267716, "y": 0.07874015748031496, "w": 0.09895833333333333, "h": 0.17592592592592593, "target": 9}, {"x": 0.8562992125984252, "y": 0.07874015748031496, "w": 0.09895833333333333, "h": 0.17592592592592593, "target": 10}, {"x": 0.18455544619422573, "y": 0.07874015748031496, "w": 0.05905511811023622, "h": 0.10498687664041995, "target": 2}], "12": [{"x": 0.04429133858267716, "y": 0.07874015748031496, "w": 0.09895833333333333, "h": 0.17592592592592593, "target": 13}, {"x": 0.8562992125984252, "y": 0.07874015748031496, "w": 0.09895833333333333, "h": 0.17592592592592593, "target": 14}, {"x": 0.18455544619422573, "y": 0.07874015748031496, "w": 0.05905511811023622, "h": 0.10498687664041995, "target": 2}], "13": [{"x": 0.04429133858267716, "y": 0.07874015748031496, "w": 0.09895833333333333, "h": 0.17592592592592593, "target": 14}, {"x": 0.8562992125984252, "y": 0.07874015748031496, "w": 0.09895833333333333, "h": 0.17592592592592593, "target": 12}, {"x": 0.18455544619422573, "y": 0.07874015748031496, "w": 0.05905511811023622, "h": 0.10498687664041995, "target": 2}], "14": [{"x": 0.04429133858267716, "y": 0.07874015748031496, "w": 0.09895833333333333, "h": 0.17592592592592593, "target": 12}, {"x": 0.8562992125984252, "y": 0.07874015748031496, "w": 0.09895833333333333, "h": 0.17592592592592593, "target": 13}, {"x": 0.18455544619422573, "y": 0.07874015748031496, "w": 0.05905511811023622, "h": 0.10498687664041995, "target": 2}]}};
+const img=document.getElementById('slide');
+const page=document.getElementById('page');
+let n=Number(location.hash.slice(1))||1;
+
+function render(){
+ n=Math.min(DATA.count,Math.max(1,n));
+ img.src='slides/'+n+'.png';
+ document.querySelectorAll('.hot').forEach(e=>e.remove());
+ const rect=img.getBoundingClientRect();
+ const pageRect=page.getBoundingClientRect();
+ const sx=rect.width, sy=rect.height;
+ const links=DATA.links[n]||[];
+ links.forEach(l=>{
+   const a=document.createElement('a');
+   a.className='hot';
+   a.href='#'+l.target;
+   a.style.left=(rect.left-pageRect.left+l.x*img.naturalWidth*(rect.width/img.naturalWidth))+'px';
+   a.style.top=(rect.top-pageRect.top+l.y*img.naturalHeight*(rect.height/img.naturalHeight))+'px';
+   a.style.width=(l.w*img.naturalWidth*(rect.width/img.naturalWidth))+'px';
+   a.style.height=(l.h*img.naturalHeight*(rect.height/img.naturalHeight))+'px';
+   a.onclick=e=>{e.preventDefault();n=l.target;location.hash=n;render()};
+   page.appendChild(a);
+ });
+}
+img.onload=render;
+window.onhashchange=()=>{n=Number(location.hash.slice(1))||1;render()};
+document.getElementById('home').onclick=()=>{n=1;location.hash='1';render()};
+document.getElementById('fs').onclick=async()=>{
+ try{
+  if(!document.fullscreenElement) await document.documentElement.requestFullscreen();
+  else await document.exitFullscreen();
+ }catch(e){}
+};
+let sx=0;
+document.addEventListener('touchstart',e=>{sx=e.changedTouches[0].clientX},{passive:true});
+document.addEventListener('touchend',e=>{
+ const dx=e.changedTouches[0].clientX-sx;
+ if(Math.abs(dx)>70){n=Math.min(DATA.count,Math.max(1,n+(dx<0?1:-1)));location.hash=n;render();}
+},{passive:true});
+</script>
+</body>
+</html>
