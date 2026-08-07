@@ -1,1 +1,538 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"><meta name="theme-color" content="#000"><title>Mr. Wok — Carta</title><style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#000}*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}body{touch-action:none}#viewer{position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center}#stage{position:relative;width:min(100vw,177.7777778vh);height:min(56.25vw,100vh);aspect-ratio:16/9;overflow:hidden;background:#000}#slide{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block;pointer-events:none;user-select:none}#touch{position:absolute;inset:0;z-index:5;touch-action:none}#loading{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;background:#000;z-index:20;font:16px system-ui}#fs,#home{position:fixed;z-index:30;border:0;border-radius:24px;background:rgba(0,0,0,.55);color:#fff}#fs{right:10px;top:max(10px,env(safe-area-inset-top));width:44px;height:44px;font-size:22px}#home{left:10px;bottom:max(10px,env(safe-area-inset-bottom));padding:10px 15px;font-size:13px}</style></head><body><div id="loading">Cargando carta…</div><div id="viewer"><div id="stage"><img id="slide" draggable="false" alt="Carta Mr. Wok"><div id="touch"></div></div></div><button id="fs">⛶</button><button id="home">Inicio</button><script>const DATA={"count": 14, "links": {"1": [{"x": 44.11458, "y": 10.0, "w": 40.625, "h": 72.22222, "target": 2}], "2": [{"x": 25.29422, "y": 36.54564, "w": 23.81032, "h": 10.49869, "target": 5}, {"x": 50.82511, "y": 36.54564, "w": 22.27796, "h": 10.49869, "target": 8}, {"x": 25.29422, "y": 52.95569, "w": 23.88068, "h": 10.49869, "target": 3}, {"x": 50.82511, "y": 52.95569, "w": 20.73739, "h": 10.49869, "target": 4}, {"x": 7.38189, "y": 39.58005, "w": 11.81102, "h": 20.99738, "target": 1}], "3": [{"x": 7.3894, "y": 39.58005, "w": 11.81102, "h": 20.99738, "target": 2}], "4": [{"x": 7.38189, "y": 39.58005, "w": 11.81102, "h": 20.99738, "target": 2}], "5": [{"x": 7.38189, "y": 39.58005, "w": 11.81102, "h": 20.99738, "target": 2}, {"x": 81.20079, "y": 39.50131, "w": 11.81102, "h": 20.99738, "target": 6}, {"x": 8.85827, "y": 10.49869, "w": 5.90551, "h": 10.49869, "target": 2}], "6": [{"x": 7.38189, "y": 39.58005, "w": 11.81102, "h": 20.99738, "target": 5}, {"x": 81.20079, "y": 39.50131, "w": 11.81102, "h": 20.99738, "target": 7}, {"x": 8.85827, "y": 10.49869, "w": 5.90551, "h": 10.49869, "target": 2}], "7": [{"x": 7.38189, "y": 39.58005, "w": 11.81102, "h": 20.99738, "target": 6}, {"x": 8.85827, "y": 10.49869, "w": 5.90551, "h": 10.49869, "target": 2}], "8": [{"x": 26.40625, "y": 32.77778, "w": 17.71654, "h": 31.49606, "target": 9}, {"x": 55.87723, "y": 32.77778, "w": 17.71654, "h": 31.49606, "target": 12}, {"x": 18.45554, "y": 7.87402, "w": 5.90551, "h": 10.49869, "target": 2}], "9": [{"x": 4.42913, "y": 7.87402, "w": 9.89583, "h": 17.59259, "target": 10}, {"x": 85.62992, "y": 7.87402, "w": 9.89583, "h": 17.59259, "target": 11}, {"x": 18.45554, "y": 7.87402, "w": 5.90551, "h": 10.49869, "target": 2}], "10": [{"x": 85.62992, "y": 7.87402, "w": 9.89583, "h": 17.59259, "target": 9}, {"x": 4.42913, "y": 7.87402, "w": 9.89583, "h": 17.59259, "target": 11}, {"x": 18.45554, "y": 7.87402, "w": 5.90551, "h": 10.49869, "target": 2}], "11": [{"x": 4.42913, "y": 7.87402, "w": 9.89583, "h": 17.59259, "target": 9}, {"x": 85.62992, "y": 7.87402, "w": 9.89583, "h": 17.59259, "target": 10}, {"x": 18.45554, "y": 7.87402, "w": 5.90551, "h": 10.49869, "target": 2}], "12": [{"x": 4.42913, "y": 7.87402, "w": 9.89583, "h": 17.59259, "target": 13}, {"x": 85.62992, "y": 7.87402, "w": 9.89583, "h": 17.59259, "target": 14}, {"x": 18.45554, "y": 7.87402, "w": 5.90551, "h": 10.49869, "target": 2}], "13": [{"x": 4.42913, "y": 7.87402, "w": 9.89583, "h": 17.59259, "target": 14}, {"x": 85.62992, "y": 7.87402, "w": 9.89583, "h": 17.59259, "target": 12}, {"x": 18.45554, "y": 7.87402, "w": 5.90551, "h": 10.49869, "target": 2}], "14": [{"x": 4.42913, "y": 7.87402, "w": 9.89583, "h": 17.59259, "target": 12}, {"x": 85.62992, "y": 7.87402, "w": 9.89583, "h": 17.59259, "target": 13}, {"x": 18.45554, "y": 7.87402, "w": 5.90551, "h": 10.49869, "target": 2}]}};const stage=document.getElementById('stage'),touch=document.getElementById('touch'),img=document.getElementById('slide'),loading=document.getElementById('loading');let n=1,sx=0,sy=0,moved=false;function getN(){let v=parseInt(location.hash.slice(1),10);return Number.isFinite(v)&&v>=1&&v<=DATA.count?v:1}function render(){n=getN();img.src='slides/'+n+'.png'}function go(t){if(t<1||t>DATA.count)return;n=t;history.replaceState(null,'','#'+n);render()}img.onload=()=>loading.style.display='none';window.addEventListener('hashchange',render);touch.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY;moved=false;touch.setPointerCapture?.(e.pointerId)});touch.addEventListener('pointermove',e=>{if(Math.hypot(e.clientX-sx,e.clientY-sy)>12)moved=true});touch.addEventListener('pointerup',e=>{const dx=e.clientX-sx,dy=e.clientY-sy;if(Math.abs(dx)>80&&Math.abs(dx)>Math.abs(dy)){go(n+(dx<0?1:-1));return}if(moved)return;const r=stage.getBoundingClientRect(),x=(e.clientX-r.left)/r.width*100,y=(e.clientY-r.top)/r.height*100;const hit=(DATA.links[n]||[]).find(z=>x>=z.x&&x<=z.x+z.w&&y>=z.y&&y<=z.y+z.h);if(hit)go(hit.target)});document.getElementById('home').onclick=()=>go(1);document.getElementById('fs').onclick=async()=>{try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen()}catch(e){}};n=getN();render();</script></body></html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#000000">
+  <title>Mr. Wok — Carta</title>
+  <style>
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+    body {
+      touch-action: manipulation;
+      font-family: Arial, sans-serif;
+    }
+    #viewer {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #stage {
+      position: relative;
+      width: min(100vw, 177.7777778vh);
+      height: min(56.25vw, 100vh);
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: #000;
+    }
+    #slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: fill;
+      user-select: none;
+      -webkit-user-drag: none;
+      pointer-events: none;
+    }
+    .hotspot {
+      position: absolute;
+      z-index: 10;
+      cursor: pointer;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      display: block;
+    }
+    #fullscreen {
+      position: fixed;
+      right: 10px;
+      top: max(10px, env(safe-area-inset-top));
+      z-index: 50;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(0,0,0,.55);
+      color: #fff;
+      font-size: 22px;
+    }
+    #home {
+      position: fixed;
+      left: 10px;
+      bottom: max(10px, env(safe-area-inset-bottom));
+      z-index: 50;
+      border: 0;
+      border-radius: 22px;
+      padding: 9px 15px;
+      background: rgba(0,0,0,.55);
+      color: #fff;
+      font-size: 13px;
+    }
+    #loading {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div id="loading">Cargando carta…</div>
+
+  <div id="viewer">
+    <div id="stage">
+      <img id="slide" src="slides/1.png" alt="Carta Mr. Wok">
+    </div>
+
+    <button id="fullscreen" type="button" aria-label="Pantalla completa">⛶</button>
+    <button id="home" type="button">Inicio</button>
+  </div>
+
+  <script>
+    // Zonas de navegación obtenidas directamente de los enlaces internos
+    // del PowerPoint original. Los grupos se tratan como botones completos.
+    const DATA = {
+  "count": 14,
+  "links": {
+    "1": [
+      {
+        "x": 44.114583333333336,
+        "y": 10.0,
+        "w": 40.625,
+        "h": 72.22222222222221,
+        "target": 2,
+        "name": "Elipse 4"
+      }
+    ],
+    "2": [
+      {
+        "x": 25.29421751968504,
+        "y": 36.54564012831729,
+        "w": 23.810318241469815,
+        "h": 10.498687664041995,
+        "target": 5,
+        "name": "Grupo 13"
+      },
+      {
+        "x": 50.82511482939632,
+        "y": 36.54564012831729,
+        "w": 22.27796095800525,
+        "h": 10.498687664041995,
+        "target": 8,
+        "name": "Grupo 17"
+      },
+      {
+        "x": 25.29421751968504,
+        "y": 52.95568678915136,
+        "w": 23.880675853018374,
+        "h": 10.498687664041995,
+        "target": 3,
+        "name": "Grupo 21"
+      },
+      {
+        "x": 50.82511482939632,
+        "y": 52.95568678915136,
+        "w": 20.737385170603677,
+        "h": 10.498687664041995,
+        "target": 4,
+        "name": "Grupo 30"
+      },
+      {
+        "x": 7.381889763779527,
+        "y": 39.58005249343832,
+        "w": 11.811023622047244,
+        "h": 20.99737532808399,
+        "target": 1,
+        "name": "Gráfico 32"
+      }
+    ],
+    "3": [
+      {
+        "x": 7.3894028871391075,
+        "y": 39.58005249343832,
+        "w": 11.811023622047244,
+        "h": 20.99737532808399,
+        "target": 2,
+        "name": "Gráfico 4"
+      }
+    ],
+    "4": [
+      {
+        "x": 7.381889763779527,
+        "y": 39.58005249343832,
+        "w": 11.811023622047244,
+        "h": 20.99737532808399,
+        "target": 2,
+        "name": "Gráfico 4"
+      }
+    ],
+    "5": [
+      {
+        "x": 7.381889763779527,
+        "y": 39.58005249343832,
+        "w": 11.811023622047244,
+        "h": 20.99737532808399,
+        "target": 2,
+        "name": "Gráfico 4"
+      },
+      {
+        "x": 81.2007874015748,
+        "y": 39.501312335958005,
+        "w": 11.811023622047244,
+        "h": 20.99737532808399,
+        "target": 6,
+        "name": "Gráfico 6"
+      },
+      {
+        "x": 8.858267716535433,
+        "y": 10.498687664041995,
+        "w": 5.905511811023622,
+        "h": 10.498687664041995,
+        "target": 2,
+        "name": "Gráfico 8"
+      }
+    ],
+    "6": [
+      {
+        "x": 7.381889763779527,
+        "y": 39.58005249343832,
+        "w": 11.811023622047244,
+        "h": 20.99737532808399,
+        "target": 5,
+        "name": "Gráfico 4"
+      },
+      {
+        "x": 81.2007874015748,
+        "y": 39.501312335958005,
+        "w": 11.811023622047244,
+        "h": 20.99737532808399,
+        "target": 7,
+        "name": "Gráfico 6"
+      },
+      {
+        "x": 8.858267716535433,
+        "y": 10.498687664041995,
+        "w": 5.905511811023622,
+        "h": 10.498687664041995,
+        "target": 2,
+        "name": "Gráfico 8"
+      }
+    ],
+    "7": [
+      {
+        "x": 7.381889763779527,
+        "y": 39.58005249343832,
+        "w": 11.811023622047244,
+        "h": 20.99737532808399,
+        "target": 6,
+        "name": "Gráfico 4"
+      },
+      {
+        "x": 8.858267716535433,
+        "y": 10.498687664041995,
+        "w": 5.905511811023622,
+        "h": 10.498687664041995,
+        "target": 2,
+        "name": "Gráfico 8"
+      }
+    ],
+    "8": [
+      {
+        "x": 26.406249999999996,
+        "y": 32.77777777777778,
+        "w": 17.716535433070867,
+        "h": 31.496062992125985,
+        "target": 9,
+        "name": "Elipse 3"
+      },
+      {
+        "x": 55.87723097112861,
+        "y": 32.77777777777778,
+        "w": 17.716535433070867,
+        "h": 31.496062992125985,
+        "target": 12,
+        "name": "Elipse 4"
+      },
+      {
+        "x": 18.45554461942257,
+        "y": 7.874015748031496,
+        "w": 5.905511811023622,
+        "h": 10.498687664041995,
+        "target": 2,
+        "name": "Gráfico 8"
+      }
+    ],
+    "9": [
+      {
+        "x": 4.429133858267717,
+        "y": 7.874015748031496,
+        "w": 9.895833333333332,
+        "h": 17.59259259259259,
+        "target": 10,
+        "name": "Elipse 3"
+      },
+      {
+        "x": 85.62992125984252,
+        "y": 7.874015748031496,
+        "w": 9.895833333333332,
+        "h": 17.59259259259259,
+        "target": 11,
+        "name": "Elipse 5"
+      },
+      {
+        "x": 18.45554461942257,
+        "y": 7.874015748031496,
+        "w": 5.905511811023622,
+        "h": 10.498687664041995,
+        "target": 2,
+        "name": "Gráfico 11"
+      }
+    ],
+    "10": [
+      {
+        "x": 85.62992125984252,
+        "y": 7.874015748031496,
+        "w": 9.895833333333332,
+        "h": 17.59259259259259,
+        "target": 9,
+        "name": "Elipse 4"
+      },
+      {
+        "x": 4.429133858267717,
+        "y": 7.874015748031496,
+        "w": 9.895833333333332,
+        "h": 17.59259259259259,
+        "target": 11,
+        "name": "Elipse 6"
+      },
+      {
+        "x": 18.45554461942257,
+        "y": 7.874015748031496,
+        "w": 5.905511811023622,
+        "h": 10.498687664041995,
+        "target": 2,
+        "name": "Gráfico 12"
+      }
+    ],
+    "11": [
+      {
+        "x": 4.429133858267717,
+        "y": 7.874015748031496,
+        "w": 9.895833333333332,
+        "h": 17.59259259259259,
+        "target": 9,
+        "name": "Elipse 4"
+      },
+      {
+        "x": 85.62992125984252,
+        "y": 7.874015748031496,
+        "w": 9.895833333333332,
+        "h": 17.59259259259259,
+        "target": 10,
+        "name": "Elipse 6"
+      },
+      {
+        "x": 18.45554461942257,
+        "y": 7.874015748031496,
+        "w": 5.905511811023622,
+        "h": 10.498687664041995,
+        "target": 2,
+        "name": "Gráfico 14"
+      }
+    ],
+    "12": [
+      {
+        "x": 4.429133858267717,
+        "y": 7.874015748031496,
+        "w": 9.895833333333332,
+        "h": 17.59259259259259,
+        "target": 13,
+        "name": "Elipse 4"
+      },
+      {
+        "x": 85.62992125984252,
+        "y": 7.874015748031496,
+        "w": 9.895833333333332,
+        "h": 17.59259259259259,
+        "target": 14,
+        "name": "Elipse 6"
+      },
+      {
+        "x": 18.45554461942257,
+        "y": 7.874015748031496,
+        "w": 5.905511811023622,
+        "h": 10.498687664041995,
+        "target": 2,
+        "name": "Gráfico 8"
+      }
+    ],
+    "13": [
+      {
+        "x": 4.429133858267717,
+        "y": 7.874015748031496,
+        "w": 9.895833333333332,
+        "h": 17.59259259259259,
+        "target": 14,
+        "name": "Elipse 4"
+      },
+      {
+        "x": 85.62992125984252,
+        "y": 7.874015748031496,
+        "w": 9.895833333333332,
+        "h": 17.59259259259259,
+        "target": 12,
+        "name": "Elipse 6"
+      },
+      {
+        "x": 18.45554461942257,
+        "y": 7.874015748031496,
+        "w": 5.905511811023622,
+        "h": 10.498687664041995,
+        "target": 2,
+        "name": "Gráfico 8"
+      }
+    ],
+    "14": [
+      {
+        "x": 4.429133858267717,
+        "y": 7.874015748031496,
+        "w": 9.895833333333332,
+        "h": 17.59259259259259,
+        "target": 12,
+        "name": "Elipse 4"
+      },
+      {
+        "x": 85.62992125984252,
+        "y": 7.874015748031496,
+        "w": 9.895833333333332,
+        "h": 17.59259259259259,
+        "target": 13,
+        "name": "Elipse 6"
+      },
+      {
+        "x": 18.45554461942257,
+        "y": 7.874015748031496,
+        "w": 5.905511811023622,
+        "h": 10.498687664041995,
+        "target": 2,
+        "name": "Gráfico 2"
+      }
+    ]
+  }
+};
+
+    const stage = document.getElementById("stage");
+    const slide = document.getElementById("slide");
+    const loading = document.getElementById("loading");
+
+    let currentSlide = 1;
+
+    function readSlide() {
+      const value = Number.parseInt(window.location.hash.substring(1), 10);
+      if (Number.isInteger(value) && value >= 1 && value <= DATA.count) {
+        return value;
+      }
+      return 1;
+    }
+
+    function goTo(number) {
+      const target = Math.max(1, Math.min(DATA.count, number));
+      currentSlide = target;
+      window.history.replaceState(null, "", "#" + target);
+      draw();
+    }
+
+    function draw() {
+      currentSlide = readSlide();
+
+      document.querySelectorAll(".hotspot").forEach((element) => element.remove());
+
+      slide.src = "slides/" + currentSlide + ".png";
+
+      const links = DATA.links[String(currentSlide)] || [];
+
+      links.forEach((link) => {
+        const button = document.createElement("button");
+
+        button.type = "button";
+        button.className = "hotspot";
+        button.setAttribute("aria-label", "Ir a página " + link.target);
+
+        button.style.left = link.x + "%";
+        button.style.top = link.y + "%";
+        button.style.width = link.w + "%";
+        button.style.height = link.h + "%";
+
+        button.addEventListener("click", function(event) {
+          event.preventDefault();
+          event.stopPropagation();
+          goTo(link.target);
+        });
+
+        stage.appendChild(button);
+      });
+    }
+
+    slide.addEventListener("load", function() {
+      loading.style.display = "none";
+    });
+
+    window.addEventListener("hashchange", draw);
+
+    document.getElementById("home").addEventListener("click", function() {
+      goTo(1);
+    });
+
+    document.getElementById("fullscreen").addEventListener("click", async function() {
+      try {
+        if (!document.fullscreenElement) {
+          await document.documentElement.requestFullscreen();
+        } else {
+          await document.exitFullscreen();
+        }
+      } catch (error) {
+        // Algunos móviles no permiten fullscreen desde el navegador.
+      }
+    });
+
+    // Deslizar también permite cambiar de página.
+    let startX = 0;
+    let startY = 0;
+
+    stage.addEventListener("touchstart", function(event) {
+      const touch = event.changedTouches[0];
+      startX = touch.clientX;
+      startY = touch.clientY;
+    }, { passive: true });
+
+    stage.addEventListener("touchend", function(event) {
+      const touch = event.changedTouches[0];
+      const dx = touch.clientX - startX;
+      const dy = touch.clientY - startY;
+
+      if (Math.abs(dx) > 80 && Math.abs(dx) > Math.abs(dy)) {
+        goTo(currentSlide + (dx < 0 ? 1 : -1));
+      }
+    }, { passive: true });
+
+    currentSlide = readSlide();
+    draw();
+  </script>
+</body>
+</html>
